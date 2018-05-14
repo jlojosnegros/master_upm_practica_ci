@@ -1,0 +1,47 @@
+dn: ou=gerrit,dc=example,dc=com
+objectClass: organizationalUnit
+ou: gerrit
+description: All groups of gerrit.
+
+dn: ou=accounts,dc=example,dc=com
+objectClass: organizationalUnit
+ou: accounts
+description: All accounts' entries are under this group.
+
+dn: cn=group,ou=accounts,dc=example,dc=com
+objectClass: posixGroup
+cn: group
+description: group
+gidNumber: 10000
+
+dn: uid=admin,ou=accounts,dc=example,dc=com
+objectClass: posixAccount
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+homeDirectory: /home/gerrit
+loginShell: /bin/false
+gidNumber: 10000
+uid: admin
+cn: gerrit admin
+displayName: gerrit admin
+uidNumber: 10000
+sn: admin
+givenName: gerrit
+mail: admin@example.com
+
+dn: uid=developer,ou=accounts,dc=example,dc=com
+objectClass: posixAccount
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+homeDirectory: /home/gerrit
+loginShell: /bin/false
+gidNumber: 10000
+uid: developer
+cn: gerrit developer
+displayName: gerrit developer
+uidNumber: 10001
+sn: admin
+givenName: gerrit
+mail: dev@example.com
