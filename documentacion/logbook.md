@@ -79,19 +79,31 @@ NOTA: Fichero build-image.sh con el commit del repo en la imagen
 
 ```sh
 #!/bin/bash
-docker build ­­build­arg GIT_COMMIT=$(git rev­parse HEAD) ­­build­arg COMMIT_DATE=$(git log ­1 ­­format=%cd ­­date=format:%Y­%m­%dT%H:%M:%S) ­t micaelgallego/curso­ci­ejem2:latest .
+docker build --build-arg GIT_COMMIT=$(git rev-parse HEAD) --build-arg COMMIT_DATE=$(git log -1 --format=%cd --date=format:%Y-%m-%dT%H:%M:%S) -t micaelgallego/curso-ci-ejem2:latest .
 
 ```
 
 Dockerfile para construir la imagen con el comit
 
 ```
-FROM openjdk:8­jre
+FROM openjdk:8-jre
 ARG GIT_COMMIT=unspecified
 LABEL git_commit=$GIT_COMMIT
 ARG COMMIT_DATE=unspecified
 LABEL commit_date=$COMMIT_DATE
 COPY target/*.jar /usr/app/app.jar
 WORKDIR /usr/app
-CMD [ "java", "­jar", "app.jar" ]
+CMD [ "java", "-jar", "app.jar" ]
 ```
+
+
+# Problemas
+
+Pues ahora mismo no funciona una mierda.
+
+* Los test de sistema no funcionan porque me dice que no encuentra un entorno docker
+* No puede meter el jar en el archiva porque dice que no le contesta en la ip dada ... la verdad es que a mi tampoco me contesta en esa ip desde el host, pero se supone que eso es normal porque desde el host tiene que contestar en localhost, pero al estar ejecutandose desde un contenedor de docker ... deberia de necesitar otra cosa, porque estoy haciendo lo mismo para el git que esta en el contenedor de gerrit y funciona sin problemas.
+* Tampoco funciona el crear la imagen de docker y subirla a dockerhub. Pero es porque el muy hijo de puta me dice que no tiene permisos para poder ejecutar el script de bash que le paso para que haga el trabajo ... pero no tengo ni idea de como decirle que le ponga permisos de ejecucion...
+* El SonarQube es que ni lo he intentado ...
+
+... y todo esto solo para dos putos jobs....
