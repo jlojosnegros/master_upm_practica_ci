@@ -97,13 +97,24 @@ CMD [ "java", "-jar", "app.jar" ]
 ```
 
 
-# Problemas
+# TODO
 
-Pues ahora mismo no funciona una mierda.
+* TEST DE SISTEMA:
+  * Los test de sistema no funcionan porque me dice que no encuentra un entorno docker
+  * Posible Solucion --> Quizas poniendo un chmod 777 al docker.sock pueda funcionar ... pero no lo tengo claro.
+  
+* ARCHIVA:
+  * Me da un timeout ... probar con el nombre de la maquina ? 
+  * No puede meter el jar en el archiva porque dice que no le contesta en la ip dada ... la verdad es que a mi tampoco me contesta en esa ip desde el host, pero se supone que eso es normal porque desde el host tiene que contestar en localhost, pero al estar ejecutandose desde un contenedor de docker ... deberia de necesitar otra cosa, porque estoy haciendo lo mismo para el git que esta en el contenedor de gerrit y funciona sin problemas.
 
-* Los test de sistema no funcionan porque me dice que no encuentra un entorno docker
-* No puede meter el jar en el archiva porque dice que no le contesta en la ip dada ... la verdad es que a mi tampoco me contesta en esa ip desde el host, pero se supone que eso es normal porque desde el host tiene que contestar en localhost, pero al estar ejecutandose desde un contenedor de docker ... deberia de necesitar otra cosa, porque estoy haciendo lo mismo para el git que esta en el contenedor de gerrit y funciona sin problemas.
-* Tampoco funciona el crear la imagen de docker y subirla a dockerhub. Pero es porque el muy hijo de puta me dice que no tiene permisos para poder ejecutar el script de bash que le paso para que haga el trabajo ... pero no tengo ni idea de como decirle que le ponga permisos de ejecucion...
-* El SonarQube es que ni lo he intentado ...
+* SONARQUBE
+  * El SonarQube es que ni lo he intentado ...
 
-... y todo esto solo para dos putos jobs....
+
+## Informacion 
+Credenciales de docker hub para la practica : practicacimasterupm/12341234
+
+
+## Nuevos detalles del correo.
+* Uno de ellos esta utilizando el nombre de los contenedores como nombres de maquina y no tengo claro si se lo resuelve.
+* Juan parece que ha tenido que hacer un chmod 777 al docker.sock para poder ejecutar cosas.
