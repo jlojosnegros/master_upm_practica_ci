@@ -1,0 +1,17 @@
+<settings>
+  <!-- omitted xml -->
+  <servers>
+    <server>
+      <id>archiva.internal</id>
+      <username>jenkins</username>
+      <password>jenkins01</password>
+    </server>
+    <server>
+      <id>archiva.snapshots</id>
+      <username>jenkins</username>
+      <password>jenkins01</password>
+    </server>
+    <!-- omitted xml -->
+  </servers>
+  <!-- omitted xml -->
+</settings>
