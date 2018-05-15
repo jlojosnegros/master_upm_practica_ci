@@ -12,8 +12,8 @@
 - Subir el codigo del proyecto de pruebas.
     - He tenido que darle permisos de Verify al usuario admin en refs/heads/* Label: Verify
 
-
-## Creacion de un Job de commit.
+NOTA: Instrucciones para la forja en el Tema 6
+## Creación de un Job de commit.
 
 Primero creacion de un nuevo job en Jenkins siguiendo las instrucciones dadas en las transparencias del "Tema 7- Jenkins Avanzado" para la creacion de un job de commit.
 
@@ -45,3 +45,53 @@ node {
 ```
 
 NOTA: tengo un problema con esta configuracion ... por algun motivo siempre coje el commit anterior al que ha lanzado el trigger y no encuentro ninguna opcion para poder limpiar el workspace que no pase por instalar un plugin, cosa que no quiero hacer dada la fragilidad de la forja.
+
+
+## Creación de un Job de Merge
+
+Primero creamos un nuevo job en jenkins tomando como referencia el job de commit pero cambiando el trigger de gerrit a "Ref Updated" tal y como se indica en la documentación.
+Ademas hay que cambiar el campo Pattern dentro de Branches porque si ponemos "Path: **" este job tambien se lanza con los commits. Tenemos que poner "Plain: master" en su lugar para que solo sea lanzado cuando se produce un merge con la rama master
+
+Consigo que se lance, pero no hay manera de que ejecute los test... me dice que no hay un Docker Environment valido ... 
+Este es el JenkinsFile que estoy utilizando
+
+```
+node 
+{
+    stage ('Checkout')
+    {
+        git url: 'http://172.18.0.6:8080/tic-tac-toe'
+    }
+    stage ('Build and test') 
+    {
+        docker.image('maven').inside('-p 12345:8080 -v $HOME/.m2:/root/.m2 ' + '-v /var/run/docker.sock:/var/run/docker.sock') 
+        {
+            sh 'mvn -Dtest=SeleniumSytemTest test'
+        }
+        step([$class: 'JUnitResultArchiver',
+        testResults: '**/target/surefire-reports/TEST-*.xml'])
+    }
+}
+```
+
+
+NOTA: Fichero build-image.sh con el commit del repo en la imagen
+
+```sh
+#!/bin/bash
+docker build ­­build­arg GIT_COMMIT=$(git rev­parse HEAD) ­­build­arg COMMIT_DATE=$(git log ­1 ­­format=%cd ­­date=format:%Y­%m­%dT%H:%M:%S) ­t micaelgallego/curso­ci­ejem2:latest .
+
+```
+
+Dockerfile para construir la imagen con el comit
+
+```
+FROM openjdk:8­jre
+ARG GIT_COMMIT=unspecified
+LABEL git_commit=$GIT_COMMIT
+ARG COMMIT_DATE=unspecified
+LABEL commit_date=$COMMIT_DATE
+COPY target/*.jar /usr/app/app.jar
+WORKDIR /usr/app
+CMD [ "java", "­jar", "app.jar" ]
+```
