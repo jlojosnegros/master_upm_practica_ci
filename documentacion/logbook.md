@@ -97,24 +97,41 @@ CMD [ "java", "-jar", "app.jar" ]
 ```
 
 
-# TODO
-
-* TEST DE SISTEMA:
-  * Los test de sistema no funcionan porque me dice que no encuentra un entorno docker
-  * Posible Solucion --> Quizas poniendo un chmod 777 al docker.sock pueda funcionar ... pero no lo tengo claro.
-  
-* ARCHIVA:
-  * Me da un timeout ... probar con el nombre de la maquina ? 
-  * No puede meter el jar en el archiva porque dice que no le contesta en la ip dada ... la verdad es que a mi tampoco me contesta en esa ip desde el host, pero se supone que eso es normal porque desde el host tiene que contestar en localhost, pero al estar ejecutandose desde un contenedor de docker ... deberia de necesitar otra cosa, porque estoy haciendo lo mismo para el git que esta en el contenedor de gerrit y funciona sin problemas.
-
-* SONARQUBE
-  * El SonarQube es que ni lo he intentado ...
 
 
 ## Informacion 
-Credenciales de docker hub para la practica : practicacimasterupm/12341234
-
+* Credenciales de docker hub para la practica : practicacimasterupm/12341234
+* Estado de los permisos de /var/run/docker.sock antes de que los tocase.
+```
+srw-rw---- 1 root docker 0 may 15 10:04 docker.sock
+```
 
 ## Nuevos detalles del correo.
 * Uno de ellos esta utilizando el nombre de los contenedores como nombres de maquina y no tengo claro si se lo resuelve.
 * Juan parece que ha tenido que hacer un chmod 777 al docker.sock para poder ejecutar cosas.
+
+
+## System TEst y var/run/docker.sock
+Estoy intentandolo poniendo permisos para que todos puedan leer esto ( sudo chmod o+r /var/run/docker.sock)
+srw-rw-r-- 1 root docker 0 may 15 10:04 docker.sock
+
+Parece que no funciona ...  asi que permisos de escritura al canto ... 
+y con permisos de escritura si que funciona ... en fin ... 
+
+
+# TODO
+
+* TEST DE SISTEMA:
+  * Solucionado el tema de los permisos.
+  * Ahora los problemas SON:
+	* No funcionan los wait, de modo que no podemos encontrar las ventanas emergentes.
+	* No se que le pasa a los test de cucumber que dan muchos errores.
+  * Resumiendo, SIGUEN SIN PASAR UNA SOLA VEZ LOS TEST DE SISTEMA
+  
+* ARCHIVA:
+  * Me da un timeout ... NAda, sigue dando timeout
+  * He creado un nuevo usuario en archiva (jenkins/jenkins01) dandonle los permisos necesarios en todos los repositorios y tambien he configurado las credenciales en el fichero ~/.m2/settings.xml, que se comparte con el docker, pero no parece que nada haya cambiado ... PERMISOS?
+  * No puede meter el jar en el archiva porque dice que no le contesta en la ip dada ... la verdad es que a mi tampoco me contesta en esa ip desde el host, pero se supone que eso es normal porque desde el host tiene que contestar en localhost, pero al estar ejecutandose desde un contenedor de docker ... deberia de necesitar otra cosa, porque estoy haciendo lo mismo para el git que esta en el contenedor de gerrit y funciona sin problemas.
+
+* SONARQUBE
+  * El SonarQube es que ni lo he intentado ...
