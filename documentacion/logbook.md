@@ -139,19 +139,16 @@ y con permisos de escritura si que funciona ... en fin ...
 # TODO
 
 * TEST DE SISTEMA:
-  * Solucionado el tema de los permisos.
-  * Ahora los problemas SON:
-	* No funcionan los wait, de modo que no podemos encontrar las ventanas emergentes.
-	* No se que le pasa a los test de cucumber que dan muchos errores.
-  * Resumiendo, SIGUEN SIN PASAR UNA SOLA VEZ LOS TEST DE SISTEMA
+  - [x] Solucionado el tema de los permisos.
+  - [x] No funcionan los wait, de modo que no podemos encontrar las ventanas emergentes.
+  - [?] Test Cucumber: No pasan porque siempre me dan NullPointerException, parece que los getDriver no funcionan correctamente y no tengo ni puta idea de por que.
   
 * ARCHIVA:
-  * Me da un timeout ... NAda, sigue dando timeout
-  * He creado un nuevo usuario en archiva (jenkins/jenkins01) dandonle los permisos necesarios en todos los repositorios y tambien he configurado las credenciales en el fichero ~/.m2/settings.xml, que se comparte con el docker, pero no parece que nada haya cambiado ... PERMISOS?
-  * No puede meter el jar en el archiva porque dice que no le contesta en la ip dada ... la verdad es que a mi tampoco me contesta en esa ip desde el host, pero se supone que eso es normal porque desde el host tiene que contestar en localhost, pero al estar ejecutandose desde un contenedor de docker ... deberia de necesitar otra cosa, porque estoy haciendo lo mismo para el git que esta en el contenedor de gerrit y funciona sin problemas.
+  - [?] Me da un timeout ... NAda, sigue dando timeout
+   He creado un nuevo usuario en archiva (jenkins/jenkins01) dandonle los permisos necesarios en todos los repositorios y tambien he configurado las credenciales en el fichero ~/.m2/settings.xml, que se comparte con el docker, pero no parece que nada haya cambiado ... PERMISOS?
 
 * SONARQUBE
-  * El SonarQube es que ni lo he intentado ...
+  - [ ] El SonarQube es que ni lo he intentado ...
 
 
 ## Creación de un Job de Nightly
@@ -173,11 +170,11 @@ Estoy repitiendo codigo como un cabron.
 
 [TODO]
 
-- [ ] Recibir como parametro la nueva version -> COMO COJONES SE PASAN PARAMETROS A UN JOB?
-- [ ] Modificar el pom.xml quitando el SNAPSHOT de la version ( mas o menos lo tengo.)
+- [x] Recibir como parametro la nueva version
+- [x] Modificar el pom.xml quitando el SNAPSHOT de la version ( mas o menos lo tengo.)
 - [ ] Ejecutar test unitarios y de sistema
-- [ ] Publicar artefacto en Archiva -> Esto no se porque pero no me funciona.
-- [ ] Generar una imagen docker y publicarla con el tag igual a la version del pom.xml ( supongo que una vez quitado el SNAPSHOT del final.)
-- [ ] Volver a publicarla con el tag 'latest'
+- [?] Publicar artefacto en Archiva -> Esto no se porque pero no me funciona.
+- [x] Generar una imagen docker y publicarla con el tag igual a la version del pom.xml ( supongo que una vez quitado el SNAPSHOT del final.)
+- [x] Volver a publicarla con el tag 'latest'
 - [ ] Crear un tag en el repositorio de git en Gerrit con el nombre de la version del pom.xml
-- [ ] Actualizar la version del pom.xml con el parametro que nos pasaron como version, si no termina en "-SNAPSHOT" tendremos que ponerlo nosotros.
+- [x] Actualizar la version del pom.xml con el parametro que nos pasaron como version, si no termina en "-SNAPSHOT" tendremos que ponerlo nosotros.
