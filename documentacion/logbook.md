@@ -118,6 +118,10 @@ mvn versions:set -DnewVersion=1.0.3-SNAPSHOT
 ```
 ^([0-9]*)\.([0-9]*)\.([0-9]*)-(.*)$
 ```
+* Comando para obtener la fecha del sistema en el formato que queremos:
+```
+date +%Y%m%d
+```
 
 ## Nuevos detalles del correo.
 * Uno de ellos esta utilizando el nombre de los contenedores como nombres de maquina y no tengo claro si se lo resuelve.
@@ -152,10 +156,28 @@ y con permisos de escritura si que funciona ... en fin ...
 
 ## Creación de un Job de Nightly
 
+El scheduler para el trabajo sigue el mismo patron que el de un cron.
+menuda puta pesadilla hasta que he conseguido pasar datos desde un stage hasta el siguiente.
+Estoy repitiendo codigo como un cabron.
+
 [] TODO 
 
-* Ejecutar test unitarios y de sistema
-* Crear una imagen Docker 
-* Publicar imagen Docker con el tag:X.Y.Z.nightly.YYYYMMDD
-* Ejecutar el software de la imagen y ejecutar contra el los test de sistema
-* Si los test pasan subir la imagen con un nuevo tag: nightly
+- [x] Ejecutar test unitarios y de sistema
+- [x] Crear una imagen Docker 
+- [x] Publicar imagen Docker con el tag:X.Y.Z.nightly.YYYYMMDD
+- [?] Ejecutar el software de la imagen y ejecutar contra el los test de sistema
+- [x] Si los test pasan subir la imagen con un nuevo tag: nightly
+
+
+## Creacin de un Job de Release
+
+[TODO]
+
+- [ ] Recibir como parametro la nueva version -> COMO COJONES SE PASAN PARAMETROS A UN JOB?
+- [ ] Modificar el pom.xml quitando el SNAPSHOT de la version ( mas o menos lo tengo.)
+- [ ] Ejecutar test unitarios y de sistema
+- [ ] Publicar artefacto en Archiva -> Esto no se porque pero no me funciona.
+- [ ] Generar una imagen docker y publicarla con el tag igual a la version del pom.xml ( supongo que una vez quitado el SNAPSHOT del final.)
+- [ ] Volver a publicarla con el tag 'latest'
+- [ ] Crear un tag en el repositorio de git en Gerrit con el nombre de la version del pom.xml
+- [ ] Actualizar la version del pom.xml con el parametro que nos pasaron como version, si no termina en "-SNAPSHOT" tendremos que ponerlo nosotros.
