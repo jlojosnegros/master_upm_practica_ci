@@ -105,6 +105,19 @@ CMD [ "java", "-jar", "app.jar" ]
 ```
 srw-rw---- 1 root docker 0 may 15 10:04 docker.sock
 ```
+* Repositorio de github con el proyecto de tic-tac-toe modificado para correr en ci: https://github.com/jlojosnegros/tic-tac-toe-ci
+* Comando maven para leer la version de un projecto
+```
+mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec
+```
+* Comando maven para setear la version de un projecto
+```
+mvn versions:set -DnewVersion=1.0.3-SNAPSHOT
+```
+* Expresion regular para capturar los elementos de una version de java
+```
+^([0-9]*)\.([0-9]*)\.([0-9]*)-(.*)$
+```
 
 ## Nuevos detalles del correo.
 * Uno de ellos esta utilizando el nombre de los contenedores como nombres de maquina y no tengo claro si se lo resuelve.
@@ -135,3 +148,14 @@ y con permisos de escritura si que funciona ... en fin ...
 
 * SONARQUBE
   * El SonarQube es que ni lo he intentado ...
+
+
+## Creación de un Job de Nightly
+
+[] TODO 
+
+* Ejecutar test unitarios y de sistema
+* Crear una imagen Docker 
+* Publicar imagen Docker con el tag:X.Y.Z.nightly.YYYYMMDD
+* Ejecutar el software de la imagen y ejecutar contra el los test de sistema
+* Si los test pasan subir la imagen con un nuevo tag: nightly
