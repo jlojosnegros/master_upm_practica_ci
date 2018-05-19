@@ -172,8 +172,8 @@ Estoy repitiendo codigo como un cabron.
 
 - [x] Recibir como parametro la nueva version
 - [x] Modificar el pom.xml quitando el SNAPSHOT de la version ( mas o menos lo tengo.)
-- [ ] Ejecutar test unitarios y de sistema
-- [?] Publicar artefacto en Archiva -> Esto no se porque pero no me funciona.
+- [x] Ejecutar test unitarios y de sistema
+- [x] Publicar artefacto en Archiva -> Esto no se porque pero no me funciona.
 - [x] Generar una imagen docker y publicarla con el tag igual a la version del pom.xml ( supongo que una vez quitado el SNAPSHOT del final.)
 - [x] Volver a publicarla con el tag 'latest'
 - [ ] Crear un tag en el repositorio de git en Gerrit con el nombre de la version del pom.xml
