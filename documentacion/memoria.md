@@ -1,12 +1,17 @@
 # <p style="text-align: center">Practica final </br>de </br>Integración Continua.</p>
 </br></br></br></br>
+#### <p style="text-align: center"> Jose Luis Ojosnegros</p>
+
+<div style="page-break-after: always;"></div>
+
 ## Setup inicial
+
 Pasos a realizar para lanzar la forja y tenerla funcionando:
 
-- Configurar las credenciales del usuario developer para ssh: A;adiendo la clave ssh en gerrit.
-- Crear un nuevo proyecto en Gerrit con el nombre de tic-tac-toe: Se ha creado una copia en github de este repositorio para que todos los elementos sean accesibles: http://github.com:jlojosnegros/tic-tac-toe-ci
+- Configurar las credenciales del usuario developer para ssh: añadiendo la clave ssh en gerrit.
+- Crear un nuevo proyecto en Gerrit con el nombre de tic-tac-toe: Se ha creado una copia en github de este repositorio para que todos los elementos sean accesibles: `http://github.com:jlojosnegros/tic-tac-toe-ci`
 - Subir el codigo del proyecto de pruebas.
-    - Ha habido que darle permisos de Verify al usuario admin en refs/heads/* Label: Verify
+    - Ha habido que darle permisos de Verify al usuario admin en `refs/heads/* Label: Verify`
 
 Nota: Se ha tenido que lanzar una forja anterior porque la ultima que hay en el repo no parece funcionar correctamente el ldap porque el usuario developer no me deja entrar, supongo que por algun problema de comunicacion con el contenedor de ldap.
 
@@ -20,8 +25,9 @@ Simplemente seguir las instrucciones que estan en las transparencias del tema 7 
 
 
 
-Para poder encontrar la URL del repo de Git dentro del contenedor de Gerrit se ha utilizado 'docker inspect' como puede verse en el stage 'Checkout' de los jenkinsfiles.
+Para poder encontrar la URL del repo de Git dentro del contenedor de Gerrit se ha utilizado `docker inspect` como puede verse en el stage 'Checkout' de los jenkinsfiles.
 
+<div style="page-break-after: always;"></div>
 
 ### JenkinsFile_Commit
 
@@ -51,11 +57,12 @@ node {
 
 ```
 
+<div style="page-break-after: always;"></div>
 
 ## Creación de un Job de merge.
 
-Creamos un nuevo job en jenkins utilizando el trigger de gerrit "Ref Updated" tal y como se indica en la documentación.
-Ademas hay que cambiar el campo Pattern dentro de Branches porque si ponemos "Path: **" este job tambien se lanza con los commits. Tenemos que poner "Plain: master" en su lugar para que solo sea lanzado cuando se produce un merge con la rama master
+Creamos un nuevo job en jenkins utilizando el trigger de gerrit `Ref Updated` tal y como se indica en la documentación.
+Ademas hay que cambiar el campo Pattern dentro de Branches porque si ponemos `Path: **` este job tambien se lanza con los commits. Tenemos que poner `Plain: master` en su lugar para que solo sea lanzado cuando se produce un merge con la rama master
 
 
 ![Trigger merge job](./imagenes/commit-merge-trigger.png)
@@ -211,6 +218,7 @@ psql> create database sonar;
 
 Como configuracion adicional para sonarqube tendremos que dar de alta el servicio en el settings.xml.
 
+<div style="page-break-after: always;"></div>
 
 ## Creación de un Job de nightly.
 
@@ -352,6 +360,7 @@ fi
 echo $tag
 ```
 
+<div style="page-break-after: always;"></div>
 
 ## Creación de un Job de Release.
 
